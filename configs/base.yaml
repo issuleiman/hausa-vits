@@ -1,0 +1,66 @@
+# HausaVITS Base Configuration
+audio:
+  sample_rate: 22050
+  n_fft: 1024
+  hop_length: 256
+  win_length: 1024
+  n_mels: 80
+  f_min: 0.0
+  f_max: null
+  clip_val: 1.0e-5
+
+model:
+  inter_channels: 192
+  hidden_channels: 192
+  filter_channels: 768
+  n_heads: 2
+  n_layers: 6
+  kernel_size: 3
+  p_dropout: 0.1
+  resblock: '1'
+  resblock_kernel_sizes: [3, 7, 11]
+  resblock_dilation_sizes: [[1,3,5], [1,3,5], [1,3,5]]
+  upsample_rates: [8, 8, 2, 2]
+  upsample_initial_channel: 512
+  upsample_kernel_sizes: [16, 16, 4, 4]
+  segment_size: 8192
+  use_sdp: true
+
+tone:
+  n_tones: 4
+  tone_embedding_dim: 32
+  use_tone_predictor: true
+
+prosody:
+  use_prosody_encoder: true
+  prosody_embedding_dim: 64
+
+speaker:
+  n_speakers: 0
+  gin_channels: 0
+
+training:
+  epochs: 1000
+  batch_size: 32
+  learning_rate_g: 2.0e-4
+  learning_rate_d: 2.0e-4
+  lr_decay: 0.999875
+  adam_b1: 0.8
+  adam_b2: 0.99
+  weight_decay: 0.01
+  warmup_steps: 200
+  grad_clip: null
+  fp16: true
+  log_interval: 100
+  eval_interval: 1000
+  save_interval: 5000
+  seed: 42
+
+data:
+  metadata_path: ''
+  audio_dir: ''
+  precomputed_dir: null
+  use_tone_marks: true
+  max_audio_len: null
+  min_audio_len: 0
+  num_workers: 4
