@@ -20,7 +20,7 @@ class StochasticDurationPredictor(nn.Module):
                  gin_channels: int = 0):
         super().__init__()
         self.pre = nn.Conv1d(in_channels, filter_channels, 1)
-        self.dds = DDSConv(filter_channels, kernel_size, p_dropout)
+        self.dds = DDSConv(filter_channels, kernel_size, n_layers=3, p_dropout=p_dropout)
         
         self.flows = nn.ModuleList()
         self.flows.append(Log())
